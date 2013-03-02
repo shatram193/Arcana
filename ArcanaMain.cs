@@ -21,6 +21,7 @@ namespace Arcana
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
         Player player;
+        Player player2;
 
         public ArcanaMain()
         {
@@ -38,6 +39,7 @@ namespace Arcana
         {
             // TODO: Add your initialization logic here
             player = new Player();
+            player2 = new Player(2);
             base.Initialize();
         }
 
@@ -50,7 +52,7 @@ namespace Arcana
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
             player.loadAssets(this.Content, GraphicsDevice);
-
+            player2.loadAssets(this.Content, GraphicsDevice);
             // TODO: use this.Content to load your game content here
         }
 
@@ -88,6 +90,7 @@ namespace Arcana
             GraphicsDevice.Clear(Color.Green);
             spriteBatch.Begin();
             player.drawAssets(spriteBatch);
+            player2.drawAssets(spriteBatch);
             spriteBatch.End();
             // TODO: Add your drawing code here
 

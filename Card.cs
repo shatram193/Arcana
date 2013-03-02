@@ -8,24 +8,16 @@ using Microsoft.Xna.Framework.Content;
 
 namespace Arcana
 {
-    class PlayerBox : Rect
+    class Card : Rect
     {
-        //private Texture2D rectangleTexture;
-        private static int width = 100;
-        private static int height = 50;
         //private Vector2 position;
-        private int playerNumber;
+        //private Texture2D cardTexture;
+        private static int width = 25;
+        private static int height = 50;
 
-        public PlayerBox()
+        public Card(Vector2 position)
         {
-            playerNumber = 1;
-            position = new Vector2(0, 0);
-        }
-
-        public PlayerBox(int playerNumber)
-        {
-            this.playerNumber = playerNumber;
-            position = (playerNumber == 1) ? new Vector2(0, 0) : new Vector2(700, 550);
+            this.position = position;
         }
 
         private Texture2D makeRectangle(GraphicsDevice gd)
@@ -34,19 +26,20 @@ namespace Arcana
                 (gd, width, height, 1, TextureUsage.None, SurfaceFormat.Color);
             Color[] color = new Color[width * height];
             for (int i = 0; i < color.Length; ++i)
-                color[i] = new Color(0, 0, 255, 255);
+                color[i] = new Color(255, 0, 0, 255);
             rectTexture.SetData(color);
             return rectTexture;
         }
 
         //public void Draw(SpriteBatch sb)
         //{
-        //    sb.Draw(rectTexture, position, Color.White); 
+        //    sb.Draw(rectTexture, position, Color.White);
         //}
 
         public void LoadContent(ContentManager cm, GraphicsDevice gd)
         {
             rectTexture = makeRectangle(gd);
+
         }
     }
 }
