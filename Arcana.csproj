@@ -91,6 +91,7 @@
     <Compile Include="MainRunner.cs" />
     <Compile Include="ArcanaMain.cs" />
     <Compile Include="Rect.cs" />
+    <Compile Include="Server.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Game.ico" />
