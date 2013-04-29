@@ -22,6 +22,7 @@ namespace Arcana
         SpriteBatch spriteBatch;
         Player player;
         Player player2;
+        MouseState mouseStateCurrent, mouseStatePrevious;
 
         public ArcanaMain()
         {
@@ -77,6 +78,16 @@ namespace Arcana
                 this.Exit();
 
             // TODO: Add your update logic here
+            mouseStateCurrent = Mouse.GetState();
+
+            if (mouseStateCurrent.LeftButton == ButtonState.Pressed &&
+                mouseStatePrevious.LeftButton == ButtonState.Released)
+            {
+                // Do your mouse state logic here
+            }
+
+            mouseStatePrevious = mouseStateCurrent;
+
 
             base.Update(gameTime);
         }
