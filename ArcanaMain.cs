@@ -39,6 +39,7 @@ namespace Arcana
         protected override void Initialize()
         {
             // TODO: Add your initialization logic here
+            this.IsMouseVisible = true;
             player = new Player();
             player2 = new Player(2);
             base.Initialize();
@@ -83,7 +84,10 @@ namespace Arcana
             if (mouseStateCurrent.LeftButton == ButtonState.Pressed &&
                 mouseStatePrevious.LeftButton == ButtonState.Released)
             {
+                //Console.Out.WriteLine("test");
                 // Do your mouse state logic here
+                Vector2 mousePos = new Vector2(mouseStateCurrent.X, mouseStateCurrent.Y);
+                player.onClick(mousePos);
             }
 
             mouseStatePrevious = mouseStateCurrent;

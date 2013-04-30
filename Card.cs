@@ -14,6 +14,7 @@ namespace Arcana
         //private Texture2D cardTexture;
         private static int width = 25;
         private static int height = 50;
+        private bool inPlay = false;
 
         public Card(Vector2 position)
         {
@@ -40,6 +41,23 @@ namespace Arcana
         {
             rectTexture = makeRectangle(gd);
 
+        }
+
+        public void clicked()
+        {
+            if (!inPlay)
+                inPlay = true;
+            Console.Out.WriteLine("clicked");
+        }
+
+        public int getWidth()
+        {
+            return width;
+        }
+
+        public int getHeight()
+        {
+            return height;
         }
     }
 }

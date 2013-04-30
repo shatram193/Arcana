@@ -48,5 +48,6 @@ namespace Arcana
         {
             rectTexture = makeRectangle(gd);
         }
+
     }
 }

@@ -47,5 +47,17 @@ namespace Arcana
             foreach (string s in hand.Keys)
                 hand[s].LoadContent(cm, gd);
         }
+
+        public void onClick(Vector2 pos)
+        {
+            foreach (string s in hand.Keys)
+            {
+                Card card = hand[s];
+                Vector2 bounds = card.getPosition();
+                if ((pos.X <= (bounds.X + card.getWidth())) && (pos.X >= bounds.X)
+                    && (pos.Y <= bounds.Y + card.getHeight()) && (pos.Y >= bounds.Y))
+                    card.clicked();
+            }
+        }
     }
 }

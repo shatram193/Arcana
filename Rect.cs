@@ -29,5 +29,10 @@ namespace Arcana
             sb.Draw(rectTexture, position, Color.White);
         }
 
+        public Vector2 getPosition()
+        {
+            return position;
+        }
+
     }
 }
