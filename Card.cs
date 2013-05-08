@@ -5,6 +5,8 @@ using System.Text;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Content;
+using Microsoft.Xna.Framework.GamerServices;
+using Microsoft.Xna.Framework.Input;
 
 namespace Arcana
 {
@@ -14,11 +16,15 @@ namespace Arcana
         //private Texture2D cardTexture;
         private static int width = 25;
         private static int height = 50;
+        private static SpriteFont courierNew;
+        private Vector2 fontPos;
         private bool inPlay = false;
+        private string cardName;
 
         public Card(Vector2 position)
         {
             this.position = position;
+            cardName = "bear";
         }
 
         private Texture2D makeRectangle(GraphicsDevice gd)
@@ -40,7 +46,8 @@ namespace Arcana
         public void LoadContent(ContentManager cm, GraphicsDevice gd)
         {
             rectTexture = makeRectangle(gd);
-
+            courierNew = cm.Load<SpriteFont>("Courier New");
+            fontPos = position;
         }
 
         public void clicked()
@@ -59,5 +66,16 @@ namespace Arcana
         {
             return height;
         }
+
+        //courtesy http://msdn.microsoft.com/en-us/library/bb447673(v=xnagamestudio.31).aspx
+        public void Draw(SpriteBatch sb)
+        {
+            //sb.Draw(rectTexture, position, Color.White);
+            base.Draw(sb);
+            Vector2 fontOrigin = courierNew.MeasureString(cardName) / 2;
+            sb.DrawString(courierNew, cardName, fontPos, Color.LightGreen,
+        0, fontOrigin, 1.0f, SpriteEffects.None, 0.5f);
+        }
+
     }
 }
