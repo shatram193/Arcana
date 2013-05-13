@@ -85,6 +85,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Card.cs" />
+    <None Include="DatabaseLink.cs" />
     <Compile Include="Player.cs" />
     <Compile Include="PlayerBox.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
