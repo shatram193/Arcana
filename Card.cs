@@ -20,11 +20,20 @@ namespace Arcana
         private Vector2 fontPos;
         private bool inPlay = false;
         private string cardName;
+        private int power;
 
         public Card(Vector2 position)
         {
             this.position = position;
             cardName = "bear";
+            power = 2;
+        }
+
+        public Card(Vector2 position, string cardName, int power)
+        {
+            this.position = position;
+            this.cardName = cardName;
+            this.power = power;
         }
 
         private Texture2D makeRectangle(GraphicsDevice gd)
@@ -54,7 +63,7 @@ namespace Arcana
         {
             if (!inPlay)
                 inPlay = true;
-            Console.Out.WriteLine("clicked");
+            Console.Out.WriteLine(cardName + " " + power);
         }
 
         public int getWidth()
