@@ -33,7 +33,7 @@ namespace Arcana
         string connectionString;
         connectionString = "SERVER=" + server + ";" + "DATABASE=" + 
 		database + ";" + "UID=" + uid + ";" + "PASSWORD=" + password + ";"
-        + "PORT=" + "3307" + ";";
+        + "PORT=" + "3306" + ";";
 
         connection = new MySqlConnection(connectionString);
         if (connection == null) Console.Out.WriteLine("Connection failed!");
@@ -88,7 +88,8 @@ namespace Arcana
     //Insert statement
     public void Insert()
     {
-        string query = "INSERT INTO tableinfo (name, age) VALUES('John Smith', '33')";
+        string playerName = "Player1";
+        string query = "INSERT INTO " + playerName + " VALUES('Angel', '5')";
 
         //open connection
         if (this.OpenConnection() == true)

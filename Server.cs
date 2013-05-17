@@ -13,15 +13,14 @@ namespace Arcana
     {   
         private TcpListener tcpListener;
         private Thread listenThread;
+        private static DatabaseLink db;
 
         public Server()
         {
             this.tcpListener = new TcpListener(IPAddress.Any, 3000);
             this.listenThread = new Thread(new ThreadStart(ListenForClients));
             this.listenThread.Start();
-            DatabaseLink db = new DatabaseLink();
-            db.OpenConnection();
-            db.CloseConnection();
+            db = new DatabaseLink();
         }
 
         private void ListenForClients()
@@ -38,6 +37,11 @@ namespace Arcana
                 Thread clientThread = new Thread(new ParameterizedThreadStart(HandleClientComm));
                 clientThread.Start(client);
             }
+        }
+
+        public DatabaseLink getDB()
+        {
+            return db;
         }
 
         private void HandleClientComm(object client)

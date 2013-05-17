@@ -18,6 +18,9 @@ namespace Arcana
                 Server server = new Server();
                 TcpClient client = new TcpClient();
 
+                DatabaseLink db = server.getDB();
+                db.Insert();
+
                 IPEndPoint serverEndPoint = new IPEndPoint(IPAddress.Parse("127.0.0.1"), 3000);
 
                 client.Connect(serverEndPoint);
