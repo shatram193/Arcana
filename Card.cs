@@ -16,8 +16,6 @@ namespace Arcana
         //private Texture2D cardTexture;
         private static int width = 25;
         private static int height = 50;
-        private static SpriteFont courierNew;
-        private Vector2 fontPos;
         private bool inPlay = false;
         private string cardName;
         private int power;

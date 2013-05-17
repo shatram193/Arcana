@@ -12,6 +12,8 @@ namespace Arcana
     {
         protected Vector2 position;
         protected Texture2D rectTexture;
+        protected static SpriteFont courierNew;
+        protected Vector2 fontPos;
 
         //private Texture2D makeRectangle(GraphicsDevice gd)
         //{

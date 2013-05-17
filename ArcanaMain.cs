@@ -40,7 +40,7 @@ namespace Arcana
         {
             // TODO: Add your initialization logic here
             this.IsMouseVisible = true;
-            player = new Player();
+            player = new Player(1);
             player2 = new Player(2);
             base.Initialize();
         }

@@ -26,8 +26,8 @@ namespace Arcana
     private void Initialize()
     {
         server = "localhost";
-        database = "connectcsharptomysql";
-        uid = "username";
+        database = "Arcana";
+        uid = "user";
         password = "password";
         string connectionString;
         connectionString = "SERVER=" + server + ";" + "DATABASE=" + 
@@ -102,7 +102,7 @@ namespace Arcana
     //Update statement
     public void Update()
     {
-        string query = "UPDATE tableinfo SET name='Joe', age='22' WHERE name='John Smith'";
+        //string query = "UPDATE tableinfo SET name='Joe', age='22' WHERE name='John Smith'";
 
         //Open connection
         if (this.OpenConnection() == true)
@@ -110,7 +110,7 @@ namespace Arcana
             //create mysql command
             MySqlCommand cmd = new MySqlCommand();
             //Assign the query using CommandText
-            cmd.CommandText = query;
+            //cmd.CommandText = query;
             //Assign the connection using Connection
             cmd.Connection = connection;
 

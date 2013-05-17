@@ -41,6 +41,7 @@ namespace Arcana
         {
             TcpClient tcpClient = (TcpClient)client;
             NetworkStream clientStream = tcpClient.GetStream();
+            DatabaseLink db = new DatabaseLink();
 
             byte[] message = new byte[4096];
             int bytesRead;

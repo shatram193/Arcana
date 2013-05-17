@@ -13,6 +13,7 @@ namespace Arcana
         private int playerNumber;
         private PlayerBox playerBox;
         private Dictionary<string, Card> hand;
+        private int health = 20;
         //private int handSize;
 
         public Player()
@@ -27,7 +28,7 @@ namespace Arcana
         public Player(int playerNumber)
         {
             this.playerNumber = playerNumber;
-            playerBox = new PlayerBox(playerNumber);
+            playerBox = new PlayerBox(playerNumber, health);
             //handSize = 1;
             hand = new Dictionary<string, Card>();
             Vector2 position = (this.playerNumber == 1) ? new Vector2(375, 0) : new Vector2(375, 550);
