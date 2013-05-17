@@ -11,10 +11,10 @@ namespace Arcana
     class DatabaseLink
     {
         private MySqlConnection connection;
-    private string server;
-    private string database;
-    private string uid;
-    private string password;
+        private string server;
+        private string database;
+        private string uid;
+        private string password;
 
     //Constructor
     public DatabaseLink()
@@ -25,23 +25,27 @@ namespace Arcana
     //Initialize values
     private void Initialize()
     {
-        server = "localhost";
+
+        server = "127.0.0.1";
         database = "Arcana";
-        uid = "user";
+        uid = "ArcanaGame";
         password = "password";
         string connectionString;
         connectionString = "SERVER=" + server + ";" + "DATABASE=" + 
-		database + ";" + "UID=" + uid + ";" + "PASSWORD=" + password + ";";
+		database + ";" + "UID=" + uid + ";" + "PASSWORD=" + password + ";"
+        + "PORT=" + "3307" + ";";
 
         connection = new MySqlConnection(connectionString);
+        if (connection == null) Console.Out.WriteLine("Connection failed!");
     }
 
     //open connection to database
-    private bool OpenConnection()
+    public bool OpenConnection()
     {
         try
         {
             connection.Open();
+            Console.Out.WriteLine("Connection successful!");
             return true;
         }
         catch (MySqlException ex)
@@ -51,6 +55,7 @@ namespace Arcana
             //The two most common error numbers when connecting are as follows:
             //0: Cannot connect to server.
             //1045: Invalid user name and/or password.
+            Debug.WriteLine(ex.ToString());
             switch (ex.Number)
             {
                 case 0:
@@ -66,7 +71,7 @@ namespace Arcana
     }
 
     //Close connection
-    private bool CloseConnection()
+    public bool CloseConnection()
     {
         try
         {

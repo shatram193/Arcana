@@ -19,6 +19,9 @@ namespace Arcana
             this.tcpListener = new TcpListener(IPAddress.Any, 3000);
             this.listenThread = new Thread(new ThreadStart(ListenForClients));
             this.listenThread.Start();
+            DatabaseLink db = new DatabaseLink();
+            db.OpenConnection();
+            db.CloseConnection();
         }
 
         private void ListenForClients()
@@ -41,7 +44,6 @@ namespace Arcana
         {
             TcpClient tcpClient = (TcpClient)client;
             NetworkStream clientStream = tcpClient.GetStream();
-            DatabaseLink db = new DatabaseLink();
 
             byte[] message = new byte[4096];
             int bytesRead;
