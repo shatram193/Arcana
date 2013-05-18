@@ -8,7 +8,8 @@ using MySql.Data.MySqlClient;
 
 namespace Arcana
 {
-    class DatabaseLink
+    //outline courtesty http://www.codeproject.com/Articles/10213/Create-an-SQL-Server-Database-Using-Csharp
+    public class DatabaseLink
     {
         private MySqlConnection connection;
         private string server;
@@ -86,9 +87,9 @@ namespace Arcana
     }
 
     //Insert statement
-    public void Insert()
+    public void Insert(int playerNum)
     {
-        string playerName = "Player1";
+        string playerName = "Player" + playerNum;
         string query = "INSERT INTO " + playerName + " VALUES('Angel', '5')";
 
         //open connection
@@ -108,7 +109,6 @@ namespace Arcana
     //Update statement
     public void Update()
     {
-        //string query = "UPDATE tableinfo SET name='Joe', age='22' WHERE name='John Smith'";
 
         //Open connection
         if (this.OpenConnection() == true)
@@ -129,9 +129,8 @@ namespace Arcana
     }
 
     //Delete statement
-    public void Delete()
+    public void Delete(string query)
     {
-        string query = "DELETE FROM tableinfo WHERE name='John Smith'";
 
         if (this.OpenConnection() == true)
         {
@@ -142,15 +141,14 @@ namespace Arcana
     }
 
     //Select statement
-    public List <string> [] Select()
+    public List <string> [] Select(int playerNumber)
     {
-        string query = "SELECT * FROM tableinfo";
+        string query = "SELECT * FROM player" + playerNumber;
 
         //Create a list to store the result
-        List<string>[] list = new List<string>[3];
+        List<string>[] list = new List<string>[2];
         list[0] = new List<string>();
         list[1] = new List<string>();
-        list[2] = new List<string>();
 
         //Open connection
         if (this.OpenConnection() == true)
@@ -163,9 +161,8 @@ namespace Arcana
             //Read the data and store them in the list
             while (dataReader.Read())
             {
-                list[0].Add(dataReader["id"] + "");
-                list[1].Add(dataReader["name"] + "");
-                list[2].Add(dataReader["age"] + "");
+                list[0].Add(dataReader["name"] + "");
+                list[1].Add(dataReader["power"] + "");
             }
 
             //close Data Reader
@@ -184,9 +181,8 @@ namespace Arcana
     }
 
     //Count statement
-    public int Count()
+    public int Count(string query)
     {
-        string query = "SELECT Count(*) FROM tableinfo";
         int Count = -1;
 
         //Open Connection

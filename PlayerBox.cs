@@ -10,10 +10,8 @@ namespace Arcana
 {
     class PlayerBox : Rect
     {
-        //private Texture2D rectangleTexture;
         private static int width = 100;
         private static int height = 50;
-        //private Vector2 position;
         private int playerNumber;
         private int healthDisplay;
 
@@ -45,7 +43,6 @@ namespace Arcana
 
         public void Draw(SpriteBatch sb)
         {
-            //sb.Draw(rectTexture, position, Color.White);
             string stringHealth = healthDisplay.ToString();
             StringBuilder stb = new StringBuilder(stringHealth);
             base.Draw(sb);

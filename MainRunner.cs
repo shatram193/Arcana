@@ -13,25 +13,24 @@ namespace Arcana
         /// </summary>
         static void Main(string[] args)
         {
-            using (ArcanaMain game = new ArcanaMain())
+            Server server = new Server();
+            TcpClient client = new TcpClient();
+
+            DatabaseLink db = server.getDB();
+
+            IPEndPoint serverEndPoint = new IPEndPoint(IPAddress.Parse("127.0.0.1"), 3000);
+
+            client.Connect(serverEndPoint);
+
+            NetworkStream clientStream = client.GetStream();
+
+            ASCIIEncoding encoder = new ASCIIEncoding();
+            byte[] buffer = encoder.GetBytes("Hello Server!");
+
+            clientStream.Write(buffer, 0, buffer.Length);
+            clientStream.Flush();
+            using (ArcanaMain game = new ArcanaMain(db))
             {
-                Server server = new Server();
-                TcpClient client = new TcpClient();
-
-                DatabaseLink db = server.getDB();
-                db.Insert();
-
-                IPEndPoint serverEndPoint = new IPEndPoint(IPAddress.Parse("127.0.0.1"), 3000);
-
-                client.Connect(serverEndPoint);
-
-                NetworkStream clientStream = client.GetStream();
-
-                ASCIIEncoding encoder = new ASCIIEncoding();
-                byte[] buffer = encoder.GetBytes("Hello Server!");
-
-                clientStream.Write(buffer, 0, buffer.Length);
-                clientStream.Flush();
                 game.Run();
             }
         }

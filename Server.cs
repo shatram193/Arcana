@@ -13,7 +13,7 @@ namespace Arcana
     {   
         private TcpListener tcpListener;
         private Thread listenThread;
-        private static DatabaseLink db;
+        public DatabaseLink db;
 
         public Server()
         {

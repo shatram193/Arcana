@@ -18,14 +18,22 @@ namespace Arcana
     /// </summary>
     public class ArcanaMain : Microsoft.Xna.Framework.Game
     {
-        GraphicsDeviceManager graphics;
-        SpriteBatch spriteBatch;
-        Player player;
-        Player player2;
+        private GraphicsDeviceManager graphics;
+        private SpriteBatch spriteBatch;
+        private Player player;
+        private Player player2;
         MouseState mouseStateCurrent, mouseStatePrevious;
+        DatabaseLink db;
 
         public ArcanaMain()
         {
+            graphics = new GraphicsDeviceManager(this);
+            Content.RootDirectory = "Content";
+        }
+
+        public ArcanaMain(DatabaseLink db)
+        {
+            this.db = db;
             graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
         }
@@ -40,8 +48,8 @@ namespace Arcana
         {
             // TODO: Add your initialization logic here
             this.IsMouseVisible = true;
-            player = new Player(1);
-            player2 = new Player(2);
+            player = new Player(1, db);
+            player2 = new Player(2, db);
             base.Initialize();
         }
 
@@ -84,12 +92,17 @@ namespace Arcana
             if (mouseStateCurrent.LeftButton == ButtonState.Pressed &&
                 mouseStatePrevious.LeftButton == ButtonState.Released)
             {
-                //Console.Out.WriteLine("test");
                 // Do your mouse state logic here
                 Vector2 mousePos = new Vector2(mouseStateCurrent.X, mouseStateCurrent.Y);
-                player.onClick(mousePos);
+                int damage = player.onClick(mousePos);
+                player2.dealDamage(damage);
             }
-
+            if (player.getHealth() <= 0 || player2.getHealth() <= 0)
+            {
+                int playerNumber = (player.getHealth() == 0) ? player2.player() : player.player();
+                db.Insert(playerNumber);
+                this.Exit();
+            }
             mouseStatePrevious = mouseStateCurrent;
 
 

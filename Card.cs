@@ -12,8 +12,6 @@ namespace Arcana
 {
     class Card : Rect
     {
-        //private Vector2 position;
-        //private Texture2D cardTexture;
         private static int width = 25;
         private static int height = 50;
         private bool inPlay = false;
@@ -45,11 +43,6 @@ namespace Arcana
             return rectTexture;
         }
 
-        //public void Draw(SpriteBatch sb)
-        //{
-        //    sb.Draw(rectTexture, position, Color.White);
-        //}
-
         public void LoadContent(ContentManager cm, GraphicsDevice gd)
         {
             rectTexture = makeRectangle(gd);
@@ -57,11 +50,12 @@ namespace Arcana
             fontPos = position;
         }
 
-        public void clicked()
+        public int clicked()
         {
             if (!inPlay)
                 inPlay = true;
             Console.Out.WriteLine(cardName + " " + power);
+            return power;
         }
 
         public int getWidth()
@@ -77,7 +71,6 @@ namespace Arcana
         //courtesy http://msdn.microsoft.com/en-us/library/bb447673(v=xnagamestudio.31).aspx
         public void Draw(SpriteBatch sb)
         {
-            //sb.Draw(rectTexture, position, Color.White);
             base.Draw(sb);
             Vector2 fontOrigin = courierNew.MeasureString(cardName) / 2;
             sb.DrawString(courierNew, cardName, fontPos, Color.LightGreen,
