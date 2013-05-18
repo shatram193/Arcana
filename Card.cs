@@ -10,6 +10,10 @@ using Microsoft.Xna.Framework.Input;
 
 namespace Arcana
 {
+    //Programmer: Mark Shatraw
+    //Where the "magic" happens.
+    //The card draws itself (when called), displays its text,
+    //and returns its damage to its caller.
     class Card : Rect
     {
         private static int width = 25;
@@ -25,6 +29,10 @@ namespace Arcana
             power = 2;
         }
 
+        //Parameter: Vector2 position - where the card will be located
+        //relative to its top left-hand coordinates.
+        //Parameter: string cardName - the name of the card to be displayer.
+        //Parameter: int power - the power of the card.
         public Card(Vector2 position, string cardName, int power)
         {
             this.position = position;
@@ -32,6 +40,9 @@ namespace Arcana
             this.power = power;
         }
 
+        //Makes a custom texture of the appropriate dimensions,
+        //filling in each pixel and setting its alpha value individually.
+        //courtesy http://roosterproduction.wordpress.com/2008/12/20/drawing-a-filled-rectangle-in-xna-20-or-30-without-a-existing-saved-texture/
         private Texture2D makeRectangle(GraphicsDevice gd)
         {
             rectTexture = new Texture2D
@@ -43,6 +54,7 @@ namespace Arcana
             return rectTexture;
         }
 
+        //Usual loading of content, plus the font.
         public void LoadContent(ContentManager cm, GraphicsDevice gd)
         {
             rectTexture = makeRectangle(gd);
@@ -50,6 +62,8 @@ namespace Arcana
             fontPos = position;
         }
 
+        //On click, returns the power of the creature to "damage"
+        //the opponent.
         public int clicked()
         {
             if (!inPlay)
@@ -57,6 +71,8 @@ namespace Arcana
             Console.Out.WriteLine(cardName + " " + power);
             return power;
         }
+
+        //Dimensional getters. Not to be changed.
 
         public int getWidth()
         {
@@ -68,6 +84,8 @@ namespace Arcana
             return height;
         }
 
+        //Draws the font. Slightly less complicated than
+        //the Player Box because no conversions are necessary.
         //courtesy http://msdn.microsoft.com/en-us/library/bb447673(v=xnagamestudio.31).aspx
         public void Draw(SpriteBatch sb)
         {

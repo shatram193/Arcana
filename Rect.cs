@@ -8,6 +8,13 @@ using Microsoft.Xna.Framework.Content;
 
 namespace Arcana
 {
+    //Programmer: Mark Shatraw
+    //The Card and PlayerBox classes had enough in common
+    //that it seemed reasonable to have them inherit from
+    //the same abstract class. This class has certain things they
+    //share in common, but because they are different 
+    //dimensions and colors, their draw methods are in the
+    //individual classes themselves.
     class Rect
     {
         protected Vector2 position;
@@ -15,22 +22,13 @@ namespace Arcana
         protected static SpriteFont courierNew;
         protected Vector2 fontPos;
 
-        //private Texture2D makeRectangle(GraphicsDevice gd)
-        //{
-        //    rectTexture = new Texture2D
-        //        (gd, width, height, 1, TextureUsage.None, SurfaceFormat.Color);
-        //    Color [] color = new Color[width * height];
-        //    for (int i = 0; i < color.Length; ++i)
-        //        color[i] = new Color(255, 0, 0, 255);
-        //    rectTexture.SetData(color);
-        //    return rectTexture;
-        //}
-
+        //Default draw method. Not used
         public void Draw(SpriteBatch sb)
         {
             sb.Draw(rectTexture, position, Color.White);
         }
 
+        //Returns the position of the rectangle.
         public Vector2 getPosition()
         {
             return position;

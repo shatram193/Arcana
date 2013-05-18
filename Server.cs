@@ -9,6 +9,8 @@ using System.Net;
 //shell courtesy http://tech.pro/tutorial/704/csharp-tutorial-simple-threaded-tcp-server
 namespace Arcana
 {
+    //Programmer: Mark Shatraw
+    //Fairly standard threaded TCP server, minorly adapted from the provided link.
     class Server
     {   
         private TcpListener tcpListener;
@@ -39,6 +41,7 @@ namespace Arcana
             }
         }
 
+        //Returns a Database Link
         public DatabaseLink getDB()
         {
             return db;

@@ -14,12 +14,22 @@ using Microsoft.Xna.Framework.Storage;
 namespace Arcana
 {
     /// <summary>
-    /// This is the main type for your game
+    /// Programmer: Mark Shatraw
+    /// This is the main type for Arcana, where the GUI
+    /// and the components of the state that are not
+    /// the database get instantiated.
     /// </summary>
     public class ArcanaMain : Microsoft.Xna.Framework.Game
     {
+        //The main graphics components of 2D XNA games.
+        //The game asks them for sprites and drawing, and
+        //they provide.
         private GraphicsDeviceManager graphics;
         private SpriteBatch spriteBatch;
+
+        //The principal components of the game state.
+        //Players get a link to the database to get their
+        //available cards.
         private Player player;
         private Player player2;
         MouseState mouseStateCurrent, mouseStatePrevious;
@@ -46,7 +56,6 @@ namespace Arcana
         /// </summary>
         protected override void Initialize()
         {
-            // TODO: Add your initialization logic here
             this.IsMouseVisible = true;
             player = new Player(1, db);
             player2 = new Player(2, db);
@@ -63,7 +72,6 @@ namespace Arcana
             spriteBatch = new SpriteBatch(GraphicsDevice);
             player.loadAssets(this.Content, GraphicsDevice);
             player2.loadAssets(this.Content, GraphicsDevice);
-            // TODO: use this.Content to load your game content here
         }
 
         /// <summary>
@@ -72,7 +80,7 @@ namespace Arcana
         /// </summary>
         protected override void UnloadContent()
         {
-            // TODO: Unload any non ContentManager content here
+            // nothing to unload
         }
 
         /// <summary>
@@ -86,19 +94,20 @@ namespace Arcana
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed)
                 this.Exit();
 
-            // TODO: Add your update logic here
+            // Mouse logic
             mouseStateCurrent = Mouse.GetState();
 
             if (mouseStateCurrent.LeftButton == ButtonState.Pressed &&
                 mouseStatePrevious.LeftButton == ButtonState.Released)
             {
-                // Do your mouse state logic here
                 Vector2 mousePos = new Vector2(mouseStateCurrent.X, mouseStateCurrent.Y);
                 int damage = player.onClick(mousePos);
                 player2.dealDamage(damage);
             }
             if (player.getHealth() <= 0 || player2.getHealth() <= 0)
             {
+                //Victory condition: When a player's health is reduced to zero,
+                //they unlock a card in the database.
                 int playerNumber = (player.getHealth() == 0) ? player2.player() : player.player();
                 db.Insert(playerNumber);
                 this.Exit();
@@ -115,12 +124,14 @@ namespace Arcana
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Draw(GameTime gameTime)
         {
-            GraphicsDevice.Clear(Color.Green);
+
+            GraphicsDevice.Clear(Color.Green); //non-default color
             spriteBatch.Begin();
+            //The SpriteBatch draws as it receives assets from the players,
+            //like the playerBoxes and the players' cards.
             player.drawAssets(spriteBatch);
             player2.drawAssets(spriteBatch);
             spriteBatch.End();
-            // TODO: Add your drawing code here
 
             base.Draw(gameTime);
         }
